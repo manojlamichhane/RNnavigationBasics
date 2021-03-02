@@ -1,27 +1,61 @@
 import React from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "../constants";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Entypo } from "@expo/vector-icons";
+
 import CategoriesScreen from "../screens/CategoriesScreen";
 import ProductsScreen from "../screens/ProductsScreen";
 import ProductDetails from "../screens/ProductDetails";
-import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "../constants";
-import ProfileScreen from "../screens/ProfileScreen";
 import FavouritesScreen from "../screens/FavouritesScreen";
+import BioScreen from "../screens/BioScreen";
+import PersonalScreen from "../screens/PersonalScreen";
+
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import SettingScreen from "../screens/SettingScreen";
 
 const HomeStack = createStackNavigator();
 const FavouriteStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const Mainnavigator = () => {
   return (
     <NavigationContainer>
-      <TabBarNavigator />
+      <DrawerNavigator />
     </NavigationContainer>
   );
 };
 
+const DrawerNavigator = () => {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Home" component={TabBarNavigator} />
+      <Drawer.Screen name="Settings" component={SettingScreen} />
+    </Drawer.Navigator>
+  );
+};
+const ProfileStackNaviator = () => {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen name="Profile" component={TopTabNavigator} />
+    </ProfileStack.Navigator>
+  );
+};
+const TopTabNavigator = () => {
+  return (
+    <TopTab.Navigator>
+      <TopTab.Screen name="Bio" component={BioScreen} />
+      <TopTab.Screen name="Personal" component={PersonalScreen} />
+      <TopTab.Screen name="Contact" component={BioScreen} />
+    </TopTab.Navigator>
+  );
+};
 const HomeStackNavigator = () => {
   return (
     <HomeStack.Navigator>
@@ -99,7 +133,7 @@ const TabBarNavigator = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileStackNaviator}
         options={{
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {

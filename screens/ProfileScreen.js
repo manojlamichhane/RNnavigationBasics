@@ -19,7 +19,6 @@ import { useNavigation } from "@react-navigation/native";
 const recentOrders = Products.filter((item) => item.rating >= 4);
 
 const ProfileScreen = () => {
-  console.log(recentOrders);
   const getOrders = ({ item }) => {
     return (
       <View>
@@ -51,7 +50,7 @@ const ProfileScreen = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <View style={{ minHeight: 150 }}></View>
+        {/* <View style={{ minHeight: 150 }}></View>
 
         <View style={styles.profileDetail}>
           <Image
@@ -118,7 +117,7 @@ const ProfileScreen = () => {
               keyExtractor={(item) => item.id}
             />
           </View>
-        </View>
+        </View> */}
       </View>
     </ScrollView>
   );
